@@ -47,7 +47,7 @@ public class JobController {
 
 
         if(errors.hasErrors()) {
-            model.addAttribute(new JobForm());
+            model.addAttribute(jobForm);
             return "new-job";
         }
 
