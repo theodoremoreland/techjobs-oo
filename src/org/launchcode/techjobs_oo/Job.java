@@ -3,9 +3,8 @@ package org.launchcode.techjobs_oo;
 import java.util.Objects;
 
 public class Job {
-    private int id;
+    private final int id;
     private static int nextId = 1;
-
     private String name;
     private Employer employer;
     private Location location;
@@ -13,7 +12,7 @@ public class Job {
     private CoreCompetency coreCompetency;
 
     public Job() {
-        id = nextId;
+        this.id = nextId;
         nextId++;
     }
 
@@ -24,6 +23,49 @@ public class Job {
         this.location = location;
         this.positionType = positionType;
         this.coreCompetency = coreCompetency;
+    }
+
+    public boolean isValid() {
+        return (this.name != null) || (this.employer != null) || (this.location != null) || (this.positionType != null) || (this.coreCompetency != null);
+    }
+
+    @Override
+    public String toString() {
+        if (!this.isValid()) { return "OOPS! This job does not seem to exist."; }
+
+        String defaultMessage = "Data not available";
+        String name;
+        String employer;
+        String location;
+        String positionType;
+        String coreCompetency;
+        String template =
+                """
+                
+                ID:  %s
+                Name: %s
+                Employer: %s
+                Location: %s
+                Position Type: %s
+                Core Competency: %s
+                
+                """;
+
+        if (this.name != null) { name = this.name; } else { name = defaultMessage; }
+        if (this.employer != null) { employer = this.employer.getValue(); } else { employer = defaultMessage; }
+        if (this.location != null) { location = this.location.getValue(); } else { location = defaultMessage; }
+        if (this.positionType != null) { positionType = this.positionType.getValue(); } else { positionType = defaultMessage; }
+        if (this.coreCompetency != null) { coreCompetency = this.coreCompetency.getValue(); } else { coreCompetency = defaultMessage; }
+
+        String formattedString = String.format(template,
+                this.id,
+                name,
+                employer,
+                location,
+                positionType,
+                coreCompetency);
+
+        return formattedString;
     }
 
     @Override
