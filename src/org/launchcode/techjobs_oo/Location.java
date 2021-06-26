@@ -29,8 +29,7 @@ public class Location {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Location)) return false;
-        Location location = (Location) o;
+        if (!(o instanceof Location location)) return false;
         return getId() == location.getId();
     }
 
