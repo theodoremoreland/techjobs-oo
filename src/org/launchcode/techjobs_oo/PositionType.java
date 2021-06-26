@@ -3,13 +3,14 @@ package org.launchcode.techjobs_oo;
 import java.util.Objects;
 
 public class PositionType {
-    private int id;
+    private final int id;
     private static int nextId = 1;
     private String value;
 
     public PositionType() {
-        id = nextId;
+        this.id = nextId;
         nextId++;
+        this.value = "Data not available";
     }
 
     public PositionType(String value) {

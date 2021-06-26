@@ -8,8 +8,9 @@ public class Employer {
     private String value;
 
     public Employer() {
-        id = nextId;
+        this.id = nextId;
         nextId++;
+        this.value = "Data not available";
     }
 
     public Employer(String value) {
