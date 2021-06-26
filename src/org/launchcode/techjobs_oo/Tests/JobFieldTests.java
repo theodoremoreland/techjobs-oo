@@ -24,6 +24,7 @@ public class JobFieldTests {
     public void testAssignsDefaultValue() {
         String defaultValue = "Data not available";
 
+        assertEquals(new Employer("").getValue(), defaultValue);
         assertEquals(employerNoData.getValue(), defaultValue);
         assertEquals(locationNoData.getValue(), defaultValue);
         assertEquals(positionTypeNoData.getValue(), defaultValue);
