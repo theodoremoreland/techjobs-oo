@@ -7,9 +7,9 @@ import org.launchcode.techjobs_oo.*;
 
 
 public class JobTests {
-    private Job testJob1;
-    private Job testJob2;
-    private Job testJob3;
+    private Job inValidJob1;
+    private Job invalidJob2;
+    private Job validJob;
     private final String jobName = "A job name";
     private final String employerName = "An employer";
     private final String locationName = "A location";
@@ -18,9 +18,9 @@ public class JobTests {
 
     @Before
     public void instantiateJobs() {
-        this.testJob1 = new Job();
-        this.testJob2 = new Job();
-        this.testJob3 = new Job(this.jobName,
+        this.inValidJob1 = new Job();
+        this.invalidJob2 = new Job();
+        this.validJob = new Job(this.jobName,
                 new Employer(this.employerName),
                 new Location(this.locationName),
                 new PositionType(this.positionName),
@@ -30,30 +30,30 @@ public class JobTests {
 
     @Test
     public void testSettingJobId() {
-        assertEquals(testJob2.getId(), testJob1.getId() + 1);
+        assertEquals(invalidJob2.getId(), inValidJob1.getId() + 1);
     }
 
     @Test
     public void testJobConstructorSetsAllFields() {
-        assertEquals(testJob3.getName(), this.jobName);
-        assertEquals(testJob3.getEmployer().getValue(), this.employerName);
-        assertEquals(testJob3.getLocation().getValue(), this.locationName);
-        assertEquals(testJob3.getPositionType().getValue(), this.positionName);
-        assertEquals(testJob3.getCoreCompetency().getValue(), this.coreCompetencyName);
+        assertEquals(validJob.getName(), this.jobName);
+        assertEquals(validJob.getEmployer().getValue(), this.employerName);
+        assertEquals(validJob.getLocation().getValue(), this.locationName);
+        assertEquals(validJob.getPositionType().getValue(), this.positionName);
+        assertEquals(validJob.getCoreCompetency().getValue(), this.coreCompetencyName);
 
-        assertTrue(testJob3.getEmployer() instanceof Employer);
-        assertTrue(testJob3.getLocation() instanceof Location);
-        assertTrue(testJob3.getPositionType() instanceof PositionType);
-        assertTrue(testJob3.getCoreCompetency() instanceof CoreCompetency);
+        assertTrue(validJob.getEmployer() instanceof Employer);
+        assertTrue(validJob.getLocation() instanceof Location);
+        assertTrue(validJob.getPositionType() instanceof PositionType);
+        assertTrue(validJob.getCoreCompetency() instanceof CoreCompetency);
     }
 
     @Test
     public void testJobsForEquality() {
-        assertNotEquals(testJob1, testJob2);
+        assertNotEquals(inValidJob1, invalidJob2);
     }
 
     @Test
-    public void testToString() {
+    public void testValidJobToString() {
         String template =
                 """
                 
@@ -66,15 +66,20 @@ public class JobTests {
                 
                 """;
         String formattedString = String.format(template,
-                testJob3.getId(),
-                testJob3.getName(),
-                testJob3.getEmployer(),
-                testJob3.getLocation(),
-                testJob3.getPositionType(),
-                testJob3.getCoreCompetency());
+                validJob.getId(),
+                validJob.getName(),
+                validJob.getEmployer(),
+                validJob.getLocation(),
+                validJob.getPositionType(),
+                validJob.getCoreCompetency());
 
-        assertEquals('\n', testJob3.toString().charAt(0));
-        assertEquals('\n', testJob3.toString().charAt(testJob3.toString().length() - 1));
-        assertEquals(testJob3.toString(), formattedString);
+        assertEquals('\n', validJob.toString().charAt(0));
+        assertEquals('\n', validJob.toString().charAt(validJob.toString().length() - 1));
+        assertEquals(validJob.toString(), formattedString);
+    }
+
+    @Test
+    public void testInValidJobToString() {
+        assertEquals(inValidJob1.toString(), "OOPS! This job does not seem to exist.");
     }
 }
