@@ -47,11 +47,11 @@ public class JobFieldTests {
     }
 
     @Test
-    public void testAutoIncrementsIDs() {
-        assertEquals(employerNoData.getId(), employerWithData.getId() - 1);
-        assertEquals(locationNoData.getId(), locationWithData.getId() - 1);
-        assertEquals(positionTypeNoData.getId(), positionTypeWithData.getId() - 1);
-        assertEquals(coreCompetencyNoData.getId(), coreCompetencyWithData.getId() - 1);
+    public void testAutoAssignsUniqueIDs() {
+        assertNotEquals(employerNoData.getId(), employerWithData.getId());
+        assertNotEquals(locationNoData.getId(), locationWithData.getId());
+        assertNotEquals(positionTypeNoData.getId(), positionTypeWithData.getId());
+        assertNotEquals(coreCompetencyNoData.getId(), coreCompetencyWithData.getId());
     }
 
     @Test
