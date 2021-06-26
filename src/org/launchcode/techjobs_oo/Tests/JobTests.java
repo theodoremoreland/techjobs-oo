@@ -7,9 +7,10 @@ import org.launchcode.techjobs_oo.*;
 
 
 public class JobTests {
-    private Job inValidJob1;
+    private Job invalidJob;
     private Job invalidJob2;
     private Job validJob;
+    private Job validJob2;
     private final String jobName = "A job name";
     private final String employerName = "An employer";
     private final String locationName = "A location";
@@ -18,7 +19,7 @@ public class JobTests {
 
     @Before
     public void instantiateJobs() {
-        this.inValidJob1 = new Job();
+        this.invalidJob = new Job();
         this.invalidJob2 = new Job();
         this.validJob = new Job(this.jobName,
                 new Employer(this.employerName),
@@ -26,11 +27,16 @@ public class JobTests {
                 new PositionType(this.positionName),
                 new CoreCompetency(this.coreCompetencyName)
         );
+        this.validJob2 = new Job(this.jobName,
+                new Employer(),
+                new Location(),
+                new PositionType(),
+                new CoreCompetency());
     }
 
     @Test
     public void testSettingJobId() {
-        assertEquals(invalidJob2.getId(), inValidJob1.getId() + 1);
+        assertEquals(invalidJob2.getId(), invalidJob.getId() + 1);
     }
 
     @Test
@@ -49,11 +55,11 @@ public class JobTests {
 
     @Test
     public void testJobsForEquality() {
-        assertNotEquals(inValidJob1, invalidJob2);
+        assertNotEquals(invalidJob, invalidJob2);
     }
 
     @Test
-    public void testValidJobToString() {
+    public void testValidJobWithAllDataToString() {
         String template =
                 """
                 
@@ -75,11 +81,38 @@ public class JobTests {
 
         assertEquals('\n', validJob.toString().charAt(0));
         assertEquals('\n', validJob.toString().charAt(validJob.toString().length() - 1));
-        assertEquals(validJob.toString(), formattedString);
+        assertEquals(formattedString, validJob.toString());
+    }
+
+    @Test
+    public void testValidJobWithMissingDataToString() {
+        String defaultMessage = "Data not available";
+        String template =
+                """
+                
+                ID:  %s
+                Name: %s
+                Employer: %s
+                Location: %s
+                Position Type: %s
+                Core Competency: %s
+                
+                """;
+        String formattedString = String.format(template,
+                validJob2.getId(),
+                validJob2.getName(),
+                defaultMessage,
+                defaultMessage,
+                defaultMessage,
+                defaultMessage);
+
+        assertEquals('\n', validJob.toString().charAt(0));
+        assertEquals('\n', validJob.toString().charAt(validJob.toString().length() - 1));
+        assertEquals(formattedString, validJob2.toString());
     }
 
     @Test
     public void testInValidJobToString() {
-        assertEquals(inValidJob1.toString(), "OOPS! This job does not seem to exist.");
+        assertEquals(invalidJob.toString(), "OOPS! This job does not seem to exist.");
     }
 }
