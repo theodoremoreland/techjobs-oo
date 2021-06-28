@@ -1,7 +1,7 @@
-# Tech Jobs OO
+# Tech Jobs OOP
 
 This app is an evolution of [Tech Jobs Console](https://github.com/theodoremoreland/TechJobsConsole). 
-It improves upon the design of the original application by implementing object-oriented design (hence the "OO") and unit testing.
+It improves upon the design of the original application by implementing object-oriented design (hence the "OOP") and unit testing.
 The logic of the original application was abstracted into various classes. This version also has another
 significant difference from the original in that it allows the user to create their own
 job postings (whereas the original only allowed users to filter and search for preexisting postings).
